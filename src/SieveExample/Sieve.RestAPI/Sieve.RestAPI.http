@@ -1,0 +1,6 @@
+@Sieve.RestAPI_HostAddress = http://localhost:5299
+
+GET {{Sieve.RestAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
