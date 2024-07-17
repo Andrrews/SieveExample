@@ -11,7 +11,9 @@ namespace Sieve.Blazor
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
+
                 .AddInteractiveServerComponents();
+                
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7024/") });
             builder.Services.AddScoped<StudentService>();
             var app = builder.Build();
