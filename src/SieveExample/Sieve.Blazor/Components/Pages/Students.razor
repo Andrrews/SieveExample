@@ -1,0 +1,25 @@
+﻿@page "/students"
+@using Sieve.Blazor.Models
+@using Sieve.Blazor.Services
+@using Microsoft.AspNetCore.Components.QuickGrid
+@inject StudentService StudentService
+
+<h3>Students</h3>
+
+<QuickGrid Items="studentsData">
+    <PropertyColumn Property="student => student.Id" Title="ID" />
+    <PropertyColumn Property="student => student.FirstName" Title="Name" />
+    <PropertyColumn Property="student => student.LastName" Title="Age" />
+</QuickGrid>
+
+@code {
+    private PagedList<StudentDTO> students;
+    private IQueryable<StudentDTO> studentsData;
+    protected override async Task OnInitializedAsync()
+    {
+        var queryParams = "pageSize=10&page=1"; // dostosuj parametry zapytania
+        students = await StudentService.GetStudentsAsync(queryParams);
+
+        studentsData = students.PageData.AsQueryable();
+    }
+}

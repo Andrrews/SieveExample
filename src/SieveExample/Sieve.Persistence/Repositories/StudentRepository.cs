@@ -12,6 +12,13 @@ namespace Sieve.Persistence.Repositories
     {
         public StudentRepository(AppDbContext dbContext) : base(dbContext)
         {
+
+            
+        }
+
+        public async Task<Student?> GetByName(string name)
+        {
+            return Entities.FirstOrDefault(x => x.FirstName.Contains(name));
         }
     }
 }

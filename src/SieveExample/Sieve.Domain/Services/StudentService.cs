@@ -17,6 +17,7 @@ namespace Sieve.Domain.Services
     {
         public StudentService(ILogger<Student> logger, ISieveProcessor? sieveService, IOptions<SieveOptions>? sieveOptions, IUnitOfWork unitOfWork) : base(logger, sieveService, sieveOptions, unitOfWork)
         {
+
         }
     }
 }
