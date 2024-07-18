@@ -7,6 +7,8 @@ using Sieve.Domain.Services.Interfaces;
 using Sieve.Models;
 using Sieve.Persistence.Models;
 using Sieve.Persistence.UnitOfWork;
+using Sieve.RestAPI.Models;
+using Sieve.RestAPI.Sieve.Extensions;
 using Sieve.RestAPI.Sieve.Models;
 using Sieve.Services;
 using Swashbuckle.AspNetCore.Annotations;
@@ -65,25 +67,17 @@ namespace Sieve.RestAPI.Controllers
         public async Task<ActionResult> EntityGetByFilter([FromQuery] SieveModel sieveModel)
         {
              
-            var result = _unitOfWork.StudentRepository.Entities.AsNoTracking();
+            var query = _unitOfWork.StudentRepository.Entities.AsNoTracking();
  
-            result = _processor.Apply(sieveModel, result, applyPagination:false);
-
-            var totalItemCount = await result.CountAsync();
-            var pageSize = sieveModel.PageSize ?? 10;
-            var pageNumber = sieveModel.Page ?? 1;
-            var pageCount = (int)Math.Ceiling(totalItemCount / (double)pageSize);
-
-            var pagedData = await result.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
-
-            var pagedResult = new PagedList<Student>
+            //result = _processor.Apply(sieveModel, result, applyPagination:true);
+            var pagedResult = await query.ToPagedListAsync(_processor, _sieveOptions, sieveModel, student => new StudentDTO()
             {
-                PageCount = pageCount,
-                TotalItemCount = totalItemCount,
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                PageData = pagedData
-            };
+                Id = student.Id,
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                BirthDate = student.BirthDate
+            });
+             
 
             return Ok(pagedResult);
         }

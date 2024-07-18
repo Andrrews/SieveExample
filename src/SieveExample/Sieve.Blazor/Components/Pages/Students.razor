@@ -10,15 +10,22 @@
 
 <h3>Students</h3>
 
-<QuickGrid Items="studentsPageData">
-    <PropertyColumn Property="student => student.Id" Title="ID" />
-    <PropertyColumn Property="student => student.FirstName" Title="Name" />
-    <PropertyColumn Property="student => student.LastName" Title="Age" />
-</QuickGrid>
-<div>
-    <button @onclick="PreviousPage" disabled="@(!students.HasPreviousPage)">Previous</button>
-    <button @onclick="NextPage" disabled="@(!students.HasNextPage)">Next</button>
-</div>
+@if (students.PageData == null || !students.PageData.Any())
+{
+    <p>Loading...</p>
+}
+else
+{
+    <QuickGrid Items="studentsPageData">
+        <PropertyColumn Property="student => student.Id" Title="ID" />
+        <PropertyColumn Property="student => student.FirstName" Title="First Name" />
+        <PropertyColumn Property="student => student.LastName" Title="Last Name" />
+    </QuickGrid>
+    <div>
+        <button @onclick="PreviousPage" disabled="@(!students.HasPreviousPage)">Previous</button>
+        <button @onclick="NextPage" disabled="@(!students.HasNextPage)">Next</button>
+    </div>
+}
 
 @code {
     private PagedList<StudentDTO> students = new PagedList<StudentDTO>();
@@ -26,9 +33,10 @@
     private int currentPage = 1;
     private int pageSize = 10;
 
+    private bool initialize = false;
     protected override async Task OnInitializedAsync()
     {
-        await LoadDataAsync();
+            await LoadDataAsync();
     }
 
     private async Task LoadDataAsync()
