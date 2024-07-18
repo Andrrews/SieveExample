@@ -67,7 +67,7 @@ namespace Sieve.RestAPI.Controllers
         public async Task<ActionResult> EntityGetByFilter([FromQuery] SieveModel sieveModel)
         {
              
-            var query = _unitOfWork.StudentRepository.Entities.AsNoTracking();
+            var query = _unitOfWork.StudentRepository.Entities.Take(100).AsNoTracking();
  
             //result = _processor.Apply(sieveModel, result, applyPagination:true);
             var pagedResult = await query.ToPagedListAsync(_processor, _sieveOptions, sieveModel, student => new StudentDTO()
@@ -82,6 +82,32 @@ namespace Sieve.RestAPI.Controllers
             return Ok(pagedResult);
         }
 
+        [HttpDelete("entity-delete", Name = "EntityDelete")]
+        [SwaggerOperation(OperationId = "EntityDelete")]
+        public async Task<ActionResult> EntityDeleteById(int id)
+        {
+            try
+            {
+                _unitOfWork.StudentRepository.DeleteById(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+        
+        [HttpDelete("domain-delete", Name = "DomainDelete")]
+        [SwaggerOperation(OperationId = "DomainDelete")]
+        public async Task<ActionResult> DomainDeleteById(int id)
+        {
+                var result = await _studentService.DeleteAndSaveAsync(id);
+                if (!result.IsSuccess)
+                {
+                    return Problem(detail:result.ErrorMessage, statusCode:(int)result.StatusCode);
+                }
+                return Ok();
+        }
 
         private HttpStatusCode HandleWebException(WebException ex)
         {

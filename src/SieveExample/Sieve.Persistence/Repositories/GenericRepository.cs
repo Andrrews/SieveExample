@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Sieve.Persistence.Repositories.Interfaces;
 
 namespace Sieve.Persistence.Repositories
@@ -91,6 +92,8 @@ namespace Sieve.Persistence.Repositories
             else
                 return dbSet.AsNoTracking();
         }
+
+         
     }
 
 }

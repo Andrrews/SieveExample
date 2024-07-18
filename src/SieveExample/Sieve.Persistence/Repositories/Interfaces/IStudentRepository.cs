@@ -9,5 +9,6 @@ namespace Sieve.Persistence.Repositories.Interfaces
 {
     public interface IStudentRepository : IGenericRepository<Student>
     {
+        Task DeleteById(int id);
     }
 }
