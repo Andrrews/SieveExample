@@ -26,8 +26,9 @@ namespace Sieve.Persistence.Repositories
         public async Task DeleteById(int id)
         {
             var result = Entities.FirstOrDefault(s => s.Id == id);
-
+           
             if (result != null) await DeleteAsync(result);
+            await _context.SaveChangesAsync();
         }
     
     }
