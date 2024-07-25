@@ -1,0 +1,121 @@
+﻿/* Style ogólne */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.custom-file-upload {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    border: 2px dashed #000;
+    text-align: center;
+    cursor: pointer;
+}
+
+    .custom-file-upload input[type="file"] {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
+.custom-file-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    pointer-events: none;
+}
+
+/* Zapytanie @media dla dużych ekranów (np. 1920px) */
+@media (min-width: 1920px) {
+    .form-label {
+        display: inline-block;
+        width: 20%;
+        text-align: right;
+        margin-right: 1rem;
+    }
+
+    .form-control {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .custom-file-upload {
+        height: 200px;
+    }
+
+    .custom-file-label {
+        font-size: 18px;
+    }
+}
+
+/* Zapytanie @media dla średnich ekranów (1024px - 1919px) */
+@media (min-width: 1024px) and (max-width: 1919px) {
+    .form-label {
+        display: inline-block;
+        width: 25%;
+        text-align: right;
+        margin-right: 1rem;
+    }
+
+    .form-control {
+        width: 70%;
+        display: inline-block;
+    }
+
+    .custom-file-upload {
+        height: 180px;
+    }
+
+    .custom-file-label {
+        font-size: 16px;
+    }
+}
+
+/* Zapytanie @media dla mniejszych ekranów (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .form-label {
+        display: inline-block;
+        width: 30%;
+        text-align: right;
+        margin-right: 1rem;
+    }
+
+    .form-control {
+        width: 65%;
+        display: inline-block;
+    }
+
+    .custom-file-upload {
+        height: 150px;
+    }
+
+    .custom-file-label {
+        font-size: 14px;
+    }
+}
+
+/* Zapytanie @media dla małych ekranów (do 767px) */
+@media (max-width: 767px) {
+    .form-label {
+        display: block;
+        width: 100%;
+        text-align: left;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+
+    .custom-file-upload {
+        height: 100px;
+    }
+
+    .custom-file-label {
+        font-size: 12px;
+    }
+}

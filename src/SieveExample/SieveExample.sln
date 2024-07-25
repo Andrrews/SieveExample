@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sieve.Domain", "Sieve.Domai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sieve.RestAPI", "Sieve.RestAPI\Sieve.RestAPI.csproj", "{A1E0E654-4C9C-472A-9BD3-E5E5B8C1DED1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sieve.Blazor", "Sieve.Blazor\Sieve.Blazor.csproj", "{2C7A33D3-E2A3-4963-B2C8-0388F97E6D45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sieve.Blazor", "Sieve.Blazor\Sieve.Blazor.csproj", "{2C7A33D3-E2A3-4963-B2C8-0388F97E6D45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
